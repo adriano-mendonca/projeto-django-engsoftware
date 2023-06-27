@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Quiz</title>
+</head>
+
+<body>
+  <h1>Quiz</h1>
+  <p>{{ question.text }}</p>
+  <form action="{% url 'quiz' %}" method="post">
+    {% csrf_token %}
+    {% for answer in answers %}
+    <input type="radio" id="{{ answer.id }}" name="answer" value="{{ answer.id }}">
+    <label for="{{ answer.id }}">{{ answer.text }}</label><br>
+    {% endfor %}
+    <input type="submit" value="Next">
+  </form>
+  <form action="{% url 'reset-answers' %}" method="get">
+    <button type="submit">Resetar Respostas</button>
+  </form>
+</body>
+
+</html>

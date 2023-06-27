@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Result</title>
+</head>
+
+<body>
+  <h1>Result</h1>
+  <p>Sua personalidade é do tipo: {{ result.answer__personality_type }}</p>
+  <form action="{% url 'reset-answers' %}" method="get">
+    <button type="submit">Resetar Respostas</button>
+  </form>
+</body>
+
+</html>
