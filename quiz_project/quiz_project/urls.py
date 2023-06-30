@@ -20,7 +20,7 @@ from quiz.views import QuizView, ResultView, ResetAnswersView
 
 
 urlpatterns = [
-    path('', QuizView.as_view(), name='quiz'),
+    path('tese/', QuizView.as_view(), name='quiz'),
     path('result/', ResultView.as_view(), name='result'),
     path('reset-answers/', ResetAnswersView.as_view(), name='reset-answers'),
     path('admin/', admin.site.urls),

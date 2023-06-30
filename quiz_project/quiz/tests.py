@@ -1,21 +1,21 @@
-from django.test import TestCase
+
+from django.test import TestCase , Client 
 from django.urls import reverse
 
-from .models import Question
-
-
-class QuestionDetailViewTest(TestCase):
-    def setUp(self):
-        self.question = Question.objects.create(
-            title="Qual é a capital do Piauí?"
-        )
-
-    def test_question_detail_view(self):
-        url = reverse("question_detail", kwargs={"pk": self.question.pk})
+class Test_ResultView(TestCase):
+    def test_setUp(self):
+        url = 'http://localhost:8000/tese/'
+        self.client = Client()
         response = self.client.get(url)
-
         self.assertEqual(response.status_code, 200)
 
-        self.assertContains(response, self.question.title)
+    def test_render_html(self):
+        url = 'http://localhost:8000/tese/'
+        resposta = self.client.get(url)
+        self.assertTemplateUsed(resposta, 'quiz.html')
+        
 
-        self.assertContains(response, self.question.content)
+    def test_Used(self):
+        url = 'http://localhost:8000/tese/'
+        request = self.client.get(url)
+        tese = self.assertContains(request , 'Quiz')
