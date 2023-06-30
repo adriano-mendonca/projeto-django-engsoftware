@@ -13,3 +13,5 @@ class Answer(models.Model):
 class UserAnswer(models.Model):
     user_id = models.IntegerField()
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
+
+

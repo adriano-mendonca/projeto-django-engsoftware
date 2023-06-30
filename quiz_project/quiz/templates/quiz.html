@@ -3,22 +3,114 @@
 
 <head>
   <title>Quiz</title>
+  <style>
+    body {
+      background-color: #f5f5f5;
+      color: #333333;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    
+    .content {
+      padding: 20px;
+      max-width: 500px;
+      text-align: center;
+
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    
+    form {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+    
+    input[type="submit"],
+    button {
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
+    input[type="submit"]:hover,
+    button:hover {
+      background-color: #0056b3;
+    }
+    
+    /* Regras de layout responsivo */
+    @media screen and (max-width: 768px) {
+      .content {
+        padding: 10px;
+      }
+      
+      h1 {
+        font-size: 20px;
+      }
+      
+      p {
+        font-size: 16px;
+      }
+      
+      input[type="submit"],
+      button {
+        font-size: 14px;
+        padding: 8px 16px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <h1>Quiz</h1>
-  <p>{{ question.text }}</p>
-  <form action="{% url 'quiz' %}" method="post">
-    {% csrf_token %}
-    {% for answer in answers %}
-    <input type="radio" id="{{ answer.id }}" name="answer" value="{{ answer.id }}">
-    <label for="{{ answer.id }}">{{ answer.text }}</label><br>
-    {% endfor %}
-    <input type="submit" value="Next">
-  </form>
-  <form action="{% url 'reset-answers' %}" method="get">
-    <button type="submit">Resetar Respostas</button>
-  </form>
+  <div class="content">
+    <h1>Quiz</h1>
+    <div class="question-container">
+      <p>{{ question.text }}</p>
+    </div>
+    <form action="{% url 'quiz' %}" method="post">
+      {% csrf_token %}
+      {% for answer in answers %}
+      <label>
+        <input type="radio" id="{{ answer.id }}" name="answer" value="{{ answer.id }}">
+        {{ answer.text }}
+      </label><br>
+      {% endfor %}
+      <input type="submit" value="Next">
+    </form>
+    <form action="{% url 'reset-answers' %}" method="get">
+      <button type="submit">Resetar Respostas</button>
+    </form>
+  </div>
 </body>
 
 </html>
